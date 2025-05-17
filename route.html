@@ -4,12 +4,19 @@
 <head>
     <meta charset="UTF-8" />
     <title>Маршрут</title>
-    <link rel="stylesheet" href="./src/style.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="./src/styles/route.css" />
 </head>
 
 <body>
-    <div id="map" style="height: 70vh;"></div>
+    <div class="map-container">
+        <div id="map"></div>
+        <div id="place-info-panel">
+            <h2>Информация о местах</h2>
+            <div id="places-list"></div>
+        </div>
+    </div>
+
     <div class="route-actions">
         <button id="save-route">Сохранить маршрут</button>
         <button id="download-pdf">Скачать PDF</button>

@@ -1,5 +1,5 @@
-const rapidApiKey = "11fb352ef4mshd236fc96c4b8421p182a00jsn9694a7105cee";
-const openKey = "///";
+const openKey = "0eb5ec211dmshccc10bb0722767bp1073e4jsn0388a6c58479";
+const orsApiKey = "5b3ce3597851110001cf624855e2e77f184046bdbffba4c2ede8cc4c";
 
 function getParams() {
     const url = new URL(window.location.href);
@@ -10,73 +10,78 @@ function getParams() {
 }
 
 async function fetchPlacesFromAI(city, type) {
-    const prompt = `Составь JSON-массив с 5 интересными местами категории "${type}" в городе ${city}. Верни только JSON, без описаний и текста. Пример: ["Парк Горького", "Бар Петрович", "Музей Искусств", "Кафе Сова", "Усадьба Коломенское"]`;
+    const prompt = `Составь JSON-массив из 5 интересных мест в городе ${city} по категории "${type}". 
+Укажи:
+- name (название)
+- lat (широта)
+- lng (долгота)
+- description (короткое описание)
+- budget (низкий, средний, высокий)
+- rating (оценка от 1 до 5)
+- image_url (найди изображение этого места в Google и дай ссылку на изображение) 
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+Формат: [{"name":"...","lat":...,"lng":...,"description":"...","budget":"...","rating":4,"image_url":"..."}]
+Верни только JSON без текста.`;
+    // image_url нейросетка не генерирует, поэтому тут нужно подумать как подключить изображения
+    const response = await fetch("https://open-ai21.p.rapidapi.com/conversationllama", {
         method: "POST",
         headers: {
-            "Authorization": `Bearer ${openKey}`,
-            "Content-Type": "application/json"
+            'x-rapidapi-key': openKey,
+            "Content-Type": "application/json",
+            'x-rapidapi-host': 'open-ai21.p.rapidapi.com'
         },
-        body: JSON.stringify({
-            model: "gpt-4o-mini",
-            messages: [{ role: "user", content: prompt }],
-            temperature: 0.6
-        })
+        body: JSON.stringify({ messages: [{ "role": "user", "content": prompt }] })
     });
 
     const data = await response.json();
-    if (!data.choices || !data.choices[0]) {
-        console.error("Некорректный ответ от OpenAI:", data);
-        throw new Error("OpenAI не вернул результат");
-    }
-    const text = data.choices[0].message.content.trim();
-
-    if (text.startsWith("```")) {
-        text = text.replace(/```json|```/g, "").trim();
-    }
-
-    try {
-        return JSON.parse(text);
-    } catch (e) {
-        console.error("Не удалось распарсить ответ от OpenAI:", text);
-        return [];
-    }
-}
-
-async function geocodePlace(placeName) {
-    const response = await fetch("https://opencage-geocode.p.rapidapi.com/geocode/v1/json?q=" + encodeURIComponent(placeName), {
-        method: "GET",
-        headers: {
-            "X-RapidAPI-Key": rapidApiKey,
-            "X-RapidAPI-Host": "opencage-geocode.p.rapidapi.com"
-        }
-    });
-
-    const data = await response.json();
-    if (data.results.length === 0) throw new Error("Место не найдено: " + placeName);
-    return data.results[0].geometry; // { lat, lng }
+    let text = data.result?.trim().replace(/<\|.*?\|>|```json|```/g, "").trim();
+    const jsonMatch = text.match(/\[.*\]/s);
+    return jsonMatch ? JSON.parse(jsonMatch[0]) : [];
 }
 
 async function getRoute(from, to) {
-    const url = `https://trueway-directions.p.rapidapi.com/FindDrivingRoute?origin=${from.lat},${from.lng}&destination=${to.lat},${to.lng}`;
-    const response = await fetch(url, {
-        method: "GET",
+    const res = await fetch("https://api.openrouteservice.org/v2/directions/foot-walking/geojson", {
+        method: "POST",
         headers: {
-            "X-RapidAPI-Key": rapidApiKey,
-            "X-RapidAPI-Host": "trueway-directions.p.rapidapi.com"
-        }
+            "Authorization": orsApiKey,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            coordinates: [
+                [from.lng, from.lat],
+                [to.lng, to.lat]
+            ]
+        })
     });
-
-    const data = await response.json();
-    if (!data.route) throw new Error("Маршрут не найден");
-    return data.route.geometry;
+    const data = await res.json();
+    if (!data.features?.length) throw new Error("Маршрут не найден");
+    return data;
 }
 
 function drawRouteOnMap(geojson, map) {
     L.geoJSON(geojson, {
-        style: { color: 'blue', weight: 4 }
+        style: { color: 'green', weight: 3 }
     }).addTo(map);
+}
+
+function renderPlacesInfo(places, map) {
+    const container = document.getElementById("places-list");
+    container.innerHTML = "";
+    places.forEach(p => {
+        const el = document.createElement("div");
+        el.className = "place-card";
+        el.innerHTML = `
+      <img src="${p.image_url}" alt="${p.name}" />
+      <h3>${p.name}</h3>
+      <p>${p.description}</p>
+      <p><strong>Бюджет:</strong> ${p.budget}</p>
+      <p><strong>Рейтинг:</strong> ${p.rating} / 5</p>
+    `;
+        el.addEventListener("click", () => {
+            map.setView([p.lat, p.lng], 15);
+        });
+        container.appendChild(el);
+    });
 }
 
 (async () => {
@@ -84,46 +89,45 @@ function drawRouteOnMap(geojson, map) {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
     const { type, city } = getParams();
-    const placeNames = await fetchPlacesFromAI(city, type);
+    const places = await fetchPlacesFromAI(city, type);
+    const validPlaces = places.filter(p => p.lat && p.lng);
 
-    try {
-        const coords = await Promise.all(placeNames.map(geocodePlace));
+    if (!validPlaces.length) return alert("Места не найдены");
 
-        coords.forEach((point, index) => {
-            L.marker([point.lat, point.lng]).addTo(map).bindPopup(placeNames[index]);
-        });
+    // Маркеры
+    validPlaces.forEach(p => {
+        L.marker([p.lat, p.lng])
+            .addTo(map)
+            .bindPopup(`<strong>${p.name}</strong><br>${p.description}`);
+    });
 
-        for (let i = 0; i < coords.length - 1; i++) {
-            const routeGeojson = await getRoute(coords[i], coords[i + 1]);
-            drawRouteOnMap(routeGeojson, map);
+    // Маршруты
+    for (let i = 0; i < validPlaces.length - 1; i++) {
+        try {
+            const route = await getRoute(validPlaces[i], validPlaces[i + 1]);
+            drawRouteOnMap(route, map);
+        } catch (e) {
+            console.warn(`Ошибка построения маршрута между ${validPlaces[i].name} и ${validPlaces[i + 1].name}:`, e.message);
         }
-        const validCoords = coords.filter(c => c && typeof c.lat === "number" && typeof c.lng === "number");
-
-        if (validCoords.length === 0) {
-            throw new Error("Невозможно отобразить маршрут — нет валидных координат");
-        }
-
-        map.fitBounds(validCoords.map(p => [p.lat, p.lng]));
-
-        // Сохраняем маршрут
-        document.getElementById("save-route").addEventListener("click", () => {
-            localStorage.setItem("savedRoute", JSON.stringify(placeNames));
-            alert("Маршрут сохранён!");
-        });
-
-        // Генерация PDF
-        document.getElementById("download-pdf").addEventListener("click", () => {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            doc.text(`Маршрут по категории "${type}" в городе ${city}`, 10, 10);
-            placeNames.forEach((place, i) => {
-                doc.text(`${i + 1}. ${place}`, 10, 20 + i * 10);
-            });
-            doc.save("маршрут.pdf");
-        });
-
-    } catch (e) {
-        console.error(e.message);
-        alert("Ошибка: " + e.message);
     }
+
+    map.fitBounds(validPlaces.map(p => [p.lat, p.lng]));
+    renderPlacesInfo(validPlaces, map);
+
+    // Кнопки
+    document.getElementById("save-route").addEventListener("click", () => {
+        localStorage.setItem("savedRoute", JSON.stringify(validPlaces));
+        alert("Маршрут сохранён!");
+    });
+
+    document.getElementById("download-pdf").addEventListener("click", () => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.text(`Маршрут: ${type} в ${city}`, 10, 10);
+        validPlaces.forEach((p, i) => {
+            doc.text(`${i + 1}. ${p.name} (${p.rating}/5, ${p.budget})`, 10, 20 + i * 10);
+        });
+        doc.save("маршрут.pdf");
+    });
+
 })();
