@@ -1,16 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <title>Vite App</title>
+</head>
+
+<body>
+  <!DOCTYPE html>
+  <html lang="ru">
+
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/src/styles/main.css" />
-    <title>Vite App</title>
+    <title>Название проекта</title>
   </head>
-  <body>
-    <!-- блоки с версткой -->
-    <h1>Наш сайт</h1>
+
+  <body class="page">
+
+    <header class="header">
+      <div class="header__container">
+        <div class="header__logo">Название проекта</div>
+        <nav class="header__nav">
+          <ul class="header__menu">
+            <li class="header__menu-item">Меню 1</li>
+            <li class="header__menu-item">Меню 2</li>
+            <li class="header__menu-item">Меню 3</li>
+            <li class="header__menu-item">Меню 4</li>
+          </ul>
+          <div class="header__city">Город</div>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <button class="hero__button">Подобрать</button>
+    </section>
+
+    <section class="route-selector">
+      <h2 class="route-selector__title">Подобрать маршрут</h2>
+      <form class="route-selector__form">
+        <label class="route-selector__field">
+          <span class="route-selector__label">Город</span>
+          <input class="route-selector__input" type="text" name="city" placeholder="Введите город" />
+        </label>
+        <label class="route-selector__field">
+          <span class="route-selector__label">На какое кол-во времени отдых</span>
+          <input class="route-selector__input" type="text" name="duration" placeholder="Например, 3 дня" />
+        </label>
+        <label class="route-selector__field">
+          <span class="route-selector__label">Тип тура</span>
+          <select class="route-selector__input" name="tour-type">
+            <option value="">Выберите тип тура</option>
+            <option value="экскурсионный">Экскурсионный</option>
+            <option value="активный">Активный</option>
+            <option value="пляжный">Пляжный</option>
+          </select>
+        </label>
+        <button class="route-selector__submit" type="submit">Кнопка</button>
+      </form>
+    </section>
+
+    <section class="routes">
+      <h2 class="routes__title">Готовые маршруты</h2>
+      <div class="routes__grid">
+        <button class="routes__item">Маршрут 1</button>
+        <button class="routes__item">Маршрут 2</button>
+        <button class="routes__item">Маршрут 3</button>
+        <button class="routes__item">Маршрут 4</button>
+        <button class="routes__item">Маршрут 5</button>
+        <button class="routes__item">Маршрут 6</button>
+      </div>
+    </section>
+
+    <section class="about">
+      <div class="about__content">О нас</div>
+    </section>
+
+    <section class="top-places">
+      <h2 class="top-places__title">Топовые места</h2>
+      <div class="top-places__list">
+        <div class="top-places__item"></div>
+        <div class="top-places__item"></div>
+        <div class="top-places__item"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__content">Футер</div>
+    </footer>
+
+
+
+
+
 
     <script type="module" src="/src/main.js"></script>
   </body>
-</html>
+
+  </html>
