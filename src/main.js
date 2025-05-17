@@ -2,10 +2,12 @@
 
 //Пример импорта js-файла
 import setupCounter from './js/counter.js';
+import hero from './js/hero.js';
 
 //Вызываем свои функции в проекте
 document.addEventListener('DOMContentLoaded', () => {
 	setupCounter(); //вызов функции
+	hero();
 });
 
 //Функция сохранения маршрута

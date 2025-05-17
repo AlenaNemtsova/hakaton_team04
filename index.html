@@ -1,120 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="/src/styles/main.css" />
-		<title>Vite App</title>
-	</head>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gluten&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/styles/main.css" />
+    <title>Vite App</title>
+  </head>
 
-	<body>
-		<!DOCTYPE html>
-		<html lang="ru">
-			<head>
-				<meta charset="UTF-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<title>Название проекта</title>
-			</head>
+  <body>
+    <!DOCTYPE html>
+    <html lang="ru">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Название проекта</title>
+      </head>
 
-			<body class="page">
-				<header class="header">
-					<div class="header__container">
-						<div class="header__logo">Название проекта</div>
-						<nav class="header__nav">
-							<ul class="header__menu">
-								<li class="header__menu-item">Меню 1</li>
-								<li class="header__menu-item">Меню 2</li>
-								<li class="header__menu-item">Меню 3</li>
-								<li class="header__menu-item">
-									<a href="./saved-routes.html">Сохраненные маршруты</a>
-								</li>
-							</ul>
-							<div class="header__city">Город</div>
-						</nav>
-					</div>
-				</header>
+      <body class="page">
+        <header class="header">
+          <div class="header__container container">
+            <div class="header__logo">SmartVoyage</div>
+            <nav class="header__nav">
+              <ul class="header__menu">
+                <li class="header__menu-item"><a href="">Подобрать маршрут</a></li>
+                <li class="header__menu-item"><a href="">О нас</a></li>
+                <li class="header__menu-item">
+                  <a href="./saved-routes.html">Сохраненные маршруты</a>
+                </li>
+              </ul>
+            </nav>
+            <div class="header__city">Город</div>
+          </div>
+        </header>
 
-				<section class="hero">
-					<button class="hero__button">Подобрать</button>
-				</section>
+        <section class="hero" id="hero-section">
+          <div class="hero-content container">
+            <div class="hero-text animate-fade-in">
+              <h1>Твоё идеальное путешествие</h1>
+              <p>
+                ИИ спланирует твоё идеальное приключение с индивидуальными маршрутами к достопримечательностям, отелям,
+                ресторанам и барам.
+              </p>
+              <button class="hero-cta hero__button" id="get-started-btn">Подобрать маршрут</button>
+            </div>
+            <div class="hero-image animate-slide-up">
+              <div class="city-image-container">
+                <img
+                  src="https://images.pexels.com/photos/3052361/pexels-photo-3052361.jpeg"
+                  alt="Beautiful city skyline"
+                  class="current-city"
+                  data-city="paris"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
 
-				<section class="route-selector">
-					<h2 class="route-selector__title">Подобрать маршрут</h2>
-					<form class="route-selector__form">
-						<label class="route-selector__field">
-							<span class="route-selector__label">Город</span>
-							<input
-								class="route-selector__input"
-								type="text"
-								name="city"
-								placeholder="Введите город" />
-						</label>
-						<label class="route-selector__field">
-							<span class="route-selector__label"
-								>На какое кол-во времени отдых</span
-							>
-							<input
-								class="route-selector__input"
-								type="text"
-								name="duration"
-								placeholder="Например, 3 дня" />
-						</label>
-						<label class="route-selector__field">
-							<span class="route-selector__label">Тип тура</span>
-							<select class="route-selector__input" name="tour-type">
-								<option value="">Выберите тип тура</option>
-								<option value="экскурсионный">Экскурсионный</option>
-								<option value="активный">Активный</option>
-								<option value="пляжный">Пляжный</option>
-							</select>
-						</label>
-						<button class="route-selector__submit" type="submit">Кнопка</button>
-					</form>
-				</section>
+        <section class="route-selector container">
+          <h2 class="route-selector__title">Подобрать маршрут</h2>
+          <form class="route-selector__form">
+            <label class="route-selector__field">
+              <span class="route-selector__label">Город</span>
+              <input class="route-selector__input" type="text" name="city" placeholder="Введите город" />
+            </label>
+            <label class="route-selector__field">
+              <span class="route-selector__label">На какое кол-во времени отдых</span>
+              <input class="route-selector__input" type="text" name="duration" placeholder="Например, 3 дня" />
+            </label>
+            <label class="route-selector__field">
+              <span class="route-selector__label">Тип тура</span>
+              <select class="route-selector__input" name="tour-type">
+                <option value="">Выберите тип тура</option>
+                <option value="экскурсионный">Экскурсионный</option>
+                <option value="активный">Активный</option>
+                <option value="пляжный">Пляжный</option>
+              </select>
+            </label>
+            <button class="route-selector__submit" type="submit">Кнопка</button>
+          </form>
+        </section>
 
-				<section class="routes">
-					<h2 class="routes__title">Готовые маршруты</h2>
-					<div class="routes__grid">
-						<button class="routes__item">Маршрут 1</button>
-						<button class="routes__item">Маршрут 2</button>
-						<button class="routes__item">Маршрут 3</button>
-						<button class="routes__item">Маршрут 4</button>
-						<button class="routes__item">Маршрут 5</button>
-						<button class="routes__item">Маршрут 6</button>
-					</div>
-				</section>
+        <section class="routes container">
+          <h2 class="routes__title">Готовые маршруты</h2>
+          <div class="routes__grid">
+            <button class="routes__item">Маршрут 1</button>
+            <button class="routes__item">Маршрут 2</button>
+            <button class="routes__item">Маршрут 3</button>
+            <button class="routes__item">Маршрут 4</button>
+            <button class="routes__item">Маршрут 5</button>
+            <button class="routes__item">Маршрут 6</button>
+          </div>
+        </section>
 
-				<section class="about">
-					<div class="about__content">О нас</div>
-				</section>
+        <section class="about container">
+          <div class="about__content">О нас</div>
+        </section>
 
-				<section class="top-places">
-      <h2 class="top-places__title">Топовые места</h2>
-      <div class="top-places__list">
-        <div class="top-places__item">
-          <div class="top-places__image-placeholder">изображение1</div>
-          <div class="top-places__caption">название1</div>
-        </div>
+        <section class="top-places">
+          <h2 class="top-places__title">Топовые места</h2>
+          <div class="top-places__list">
+            <div class="top-places__item"></div>
+            <div class="top-places__item"></div>
+            <div class="top-places__item"></div>
+          </div>
+        </section>
 
-        <div class="top-places__item">
-          <div class="top-places__image-placeholder">изображение2</div>
-          <div class="top-places__caption">название2</div>
-        </div>
-        <div class="top-places__item">
-          <div class="top-places__image-placeholder">изображение3</div>
-          <div class="top-places__caption">название1</div>
-        </div>
-      </div>
-    </section>
+        <footer class="footer">
+          <div class="footer__content">Футер</div>
+        </footer>
 
-				<footer class="footer">
-					<div class="footer__content">Футер</div>
-				</footer>
-
-				<script type="module" src="/src/main.js"></script>
-			</body>
-		</html>
-	</body>
+        <script type="module" src="/src/main.js"></script>
+      </body>
+    </html>
+  </body>
 </html>
-
