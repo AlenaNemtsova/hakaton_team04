@@ -1,5 +1,6 @@
-#hero-section {
-  min-height: calc(80vh - 64px);
+.hero {
+  min-height: calc(100vh - 64px);
+  padding: 50px 16px;
   display: flex;
   align-items: center;
   position: relative;
@@ -7,27 +8,28 @@
   color: white;
 }
 
-.hero-content {
+.hero__content {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
   gap: 48px;
   position: relative;
   z-index: 2;
 }
 
-.hero-text {
+.hero__text {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.hero-text h1 {
+.hero__text h1 {
   font-size: 3rem;
   margin-bottom: 16px;
   color: var(--text-black);
 }
 
-.hero-text p {
+.hero__text p {
   font-size: 1.25rem;
   margin-bottom: 32px;
   max-width: 600px;
@@ -36,21 +38,22 @@
 
 .hero__button {
   align-self: flex-start;
-  padding: 12px 32px;
-  font-size: 1.1rem;
+  padding: 12px 25px;
+  font-size: 1rem;
   font-weight: 500;
   color: white;
   background-color: var(--color-accent);
-  border-radius: 20px;
   border: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
 }
 
-.hero-cta:hover {
+.hero__button:hover {
+  background-color: var(--color-buttons-hover);
   transform: translateY(-2px);
 }
 
-.hero-image {
+.hero__image {
   position: relative;
   height: 400px;
   overflow: hidden;
@@ -81,7 +84,7 @@
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 8px;
+  gap: 12px;
 }
 
 .city-dot {
@@ -97,24 +100,27 @@
   background-color: white;
 }
 
-@media (min-width: 992px) {
-  .hero-content {
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
+@media (max-width: 1024px) {
+  .hero__content {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__text h1 {
+    font-size: 2.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  #hero-section {
+  .hero {
     min-height: auto;
-    padding: 64px 0;
+    padding-block: 64px;
   }
 
-  .hero-text h1 {
+  .hero__text h1 {
     font-size: 2.25rem;
   }
 
-  .hero-image {
+  .hero__image {
     height: 300px;
   }
 }

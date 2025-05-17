@@ -1,20 +1,23 @@
-//Сюда импортируем все js-файлы
-
-//Пример импорта js-файла
-import setupCounter from './js/counter.js';
+//Сюда импортируем свои js-файлы
 import hero from './js/hero.js';
+import rootSelector from './js/root-selector.js';
+import handleFormSubmit from './js/handle-form-submit.js';
+import initTopPlaces from './js/get-top-places.js';
 
-//Вызываем свои функции в проекте
+//Вызываем функции из js-файлов
 document.addEventListener('DOMContentLoaded', () => {
-	setupCounter(); //вызов функции
 	hero();
+	initTopPlaces();
+	handleFormSubmit();
 });
 
+
 //Функция сохранения маршрута
-export function saveRouteToLocalStorage(newRoute) {
+function saveRouteToLocalStorage(newRoute) {
 	const raw = localStorage.getItem('savedRoutes');
 	const routes = raw ? JSON.parse(raw) : [];
 
 	routes.push(newRoute);
 	localStorage.setItem('savedRoutes', JSON.stringify(routes));
 }
+

@@ -1,69 +1,84 @@
-body {
-	font-family: 'Segoe UI', sans-serif;
-	background-color: #f8fbff;
-	color: #2c3e50;
-	margin: 0;
-	padding: 2rem;
+/* Стили для страницы saved-routes.html */
+:root {
+  /* Переменные для цветов */
+  --color-primary: #f9f6f2; /* цвет фона */
+  --color-secondary: #12345c; /* темно-синий */
+  --color-accent: #e47a1c; /* акценты, логотип */
+  --text-black: #2e2e2e; /* текст основной */
+  --text-grey: #5a5a5a; /* текст серый */
+  --color-buttons-hover: #cc6a17; /* ховер кнопок */
+
+  font-family: 'Montserrat', system-ui, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
-h1 {
-	font-size: 1.8rem;
-	color: #1e3a8a;
-	margin-bottom: 1.5rem;
+body {
+  /* font-family: 'Segoe UI', sans-serif; */
+  background-color: var(--color-primary);
+  color: var(--text-black);
+  margin: 0;
+  padding: 2rem;
+}
+
+.saved-routes {
+  font-size: 1.8rem;
+  color: var(--color-accent);
+  margin-bottom: 1.5rem;
 }
 
 h2 {
-	font-size: 1.3rem;
-	margin-top: 1.5rem;
-	color: #1d4ed8;
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
+  color: #1d4ed8;
 }
 
 h3 {
-	margin-top: 1rem;
-	font-size: 1.1rem;
-	color: #1e40af;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #1e40af;
 }
 
 ul {
-	list-style-type: none;
-	padding-left: 0;
-	margin-top: 0.5rem;
-	margin-bottom: 1rem;
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 li {
-	padding: 0.4rem 0;
-	border-bottom: 1px solid #e2e8f0;
-	font-size: 0.95rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 0.95rem;
 }
 
 button {
-	background-color: #2563eb;
-	color: white;
-	border: none;
-	padding: 0.4rem 0.9rem;
-	margin-top: 0.5rem;
-	margin-right: 0.5rem;
-	border-radius: 4px;
-	cursor: pointer;
-	font-size: 0.9rem;
-	transition: background-color 0.2s ease-in-out;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease-in-out;
 }
 
 button:hover {
-	background-color: #1e40af;
+  background-color: #1e40af;
 }
 
 button:disabled {
-	background-color: #93c5fd;
-	cursor: not-allowed;
+  background-color: #93c5fd;
+  cursor: not-allowed;
 }
 
 div#saved-routes-list > div {
-	background-color: white;
-	border: 1px solid #dbeafe;
-	border-radius: 8px;
-	padding: 1rem;
-	margin-bottom: 1.5rem;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  background-color: white;
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }

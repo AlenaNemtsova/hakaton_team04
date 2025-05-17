@@ -1,10 +1,4 @@
 export default function hero() {
-    // const getStartedBtn = element.querySelector('#get-started-btn');
-    // getStartedBtn.addEventListener('click', () => {
-    //     document.getElementById('search-section').scrollIntoView({
-    //         behavior: 'smooth'
-    //     });
-    // });
 
     const cities = [
         {
@@ -29,8 +23,6 @@ export default function hero() {
         }
     ];
 
-    // 
-    const cityImageContainer = element.querySelector('.city-image-container');
     const citySelector = document.createElement('div');
     citySelector.className = 'city-selector';
 
@@ -43,18 +35,18 @@ export default function hero() {
         dot.addEventListener('click', () => {
             updateCityImage(city);
 
-            element.querySelectorAll('.city-dot').forEach(d => d.classList.remove('active'));
+            document.querySelectorAll('.city-dot').forEach(d => d.classList.remove('active'));
             dot.classList.add('active');
         });
     });
 
-    element.querySelector('.hero-image').appendChild(citySelector);
+    document.querySelector('.hero__image').appendChild(citySelector);
 
-    // Setup rotating city images every 5 seconds
+    // Смена изображений городов каждые 3 секунды
     let currentCityIndex = 0;
 
     function updateCityImage(city) {
-        const currentImg = element.querySelector('.current-city');
+        const currentImg = document.querySelector('.current-city');
         currentImg.src = city.url;
         currentImg.alt = city.alt;
         currentImg.dataset.city = city.name;
@@ -64,9 +56,9 @@ export default function hero() {
         currentCityIndex = (currentCityIndex + 1) % cities.length;
         updateCityImage(cities[currentCityIndex]);
 
-        // Update active dot
-        element.querySelectorAll('.city-dot').forEach((dot, index) => {
+        // Обновление активной точки
+        document.querySelectorAll('.city-dot').forEach((dot, index) => {
             dot.classList.toggle('active', index === currentCityIndex);
         });
-    }, 5000);
+    }, 3000);
 }

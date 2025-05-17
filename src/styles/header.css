@@ -10,6 +10,7 @@
 
 .header__container {
   height: 64px;
+  padding-inline: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -61,4 +62,10 @@
   background-color: var(--color-accent);
   transform: scaleX(0);
   transition: transform 0.3s ease;
+}
+
+.header__city {
+  min-width: 150px;
+  max-width: 250px;
+  text-align: right;
 }

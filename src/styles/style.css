@@ -3,7 +3,7 @@
 :root {
   /* Переменные для цветов */
   --color-primary: #f9f6f2; /* цвет фона */
-  --color-secondary: #12345c;
+  --color-secondary: #12345c; /* темнл-синий */
   --color-accent: #e47a1c; /* акценты, логотип */
   --text-black: #2e2e2e; /* текст основной */
   --text-grey: #5a5a5a; /* текст серый */
@@ -25,8 +25,6 @@ a {
 
 body {
   margin: 0;
-  /* display: flex;
-    place-items: center; */
   min-width: 320px;
   min-height: 100vh;
   background-color: var(--color-primary);
@@ -47,10 +45,13 @@ button {
   font-family: inherit;
 }
 
-/* Layout */
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
+}
+
+#js-results p {
+  text-align: center;
 }

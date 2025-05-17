@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Маршрут по Москве</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+      :root {
+        --main-color: #ff6f00;
+        --background: #fffaf4;
+        --card-bg: #ffffff;
+        --text: #333;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: var(--background);
+        color: var(--text);
+      }
+
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 30px;
+        gap: 30px;
+      }
+
+      .map-container {
+        flex: 1 1 600px;
+        height: 350px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+      }
+
+      .sidebar {
+        flex: 1 1 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .place-card {
+        display: flex;
+        gap: 12px;
+        background-color: var(--card-bg);
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+        transition: transform 0.2s ease;
+      }
+
+      .place-card:hover {
+        transform: scale(1.02);
+      }
+
+      .place-card img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+
+      .place-info h3 {
+        margin: 0;
+        font-size: 1.1em;
+        color: var(--main-color);
+      }
+
+      .place-info p {
+        margin: 4px 0;
+        font-size: 0.9em;
+        color: #555;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 30px 0;
+      }
+
+      .buttons button {
+        background-color: var(--main-color);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 12px 25px;
+        font-size: 1em;
+        cursor: pointer;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s;
+      }
+
+      .buttons button:hover {
+        background-color: #e65c00;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="map" class="map-container"></div>
+      <div class="sidebar">
+        <div class="place-card">
+          <img src="https://moskultura.ru/wp-content/uploads/2022/08/krasn_pl1-1140x668.jpg" alt="Красная площадь" />
+          <div class="place-info">
+            <h3>Красная площадь</h3>
+            <p>Москва, Россия</p>
+            <p>Исторический центр Москвы</p>
+            <p>⭐️ 4.8</p>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <img src="https://img.tourister.ru/files/2/9/0/2/0/7/1/0/original.jpg" alt="Метро Белорусская" />
+          <div class="place-info">
+            <h3>Метро Белорусская</h3>
+            <p>ЦАО, Москва</p>
+            <p>Станция московского метрополитена</p>
+            <p>⭐️ 4.5</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button>Сохранить маршрут</button>
+      <button>Сохранить список мест</button>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+      const map = L.map('map').setView([55.7558, 37.6173], 13);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap',
+      }).addTo(map);
+
+      const route = [
+        [55.7539, 37.6208],
+        [55.7762, 37.5847],
+        [55.765, 37.6032],
+      ];
+
+      L.polyline(route, { color: '#ff6f00', weight: 5 }).addTo(map);
+      route.forEach((coord) => L.circleMarker(coord, { radius: 6, color: '#ff6f00' }).addTo(map));
+    </script>
+  </body>
+</html>

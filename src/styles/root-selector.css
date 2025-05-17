@@ -1,0 +1,222 @@
+/* Общее для формы */
+.route-selector {
+  padding-block: 50px;
+}
+
+.route-selector__form {
+  max-width: 480px;
+  margin: 20px auto;
+  padding: 24px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+  color: #222;
+}
+
+/* Заголовок */
+.route-selector__title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+  color: var(--color-secondary);
+}
+
+/* Общий блок для каждого поля */
+.route-selector__field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+/* Лейблы */
+.route-selector__label {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--color-secondary);
+}
+
+.interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.interests input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.interests__button {
+  padding: 6px 12px;
+  border: 1.5px solid #ccc;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  color: var(--color-secondary);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  white-space: nowrap; /* чтобы текст не переносился */
+  display: inline-flex;
+  min-width: auto; /* отменяем минимальную ширину */
+  flex-grow: 0;
+}
+
+.interests input[type='checkbox']:checked + .interests__button {
+  background-color: #4a90e2;
+  border-color: #4a90e2;
+  color: white;
+  font-weight: 600;
+}
+
+/* Инпуты текста и селекты */
+.route-selector__input[type='text'],
+.route-selector__input[type='range'],
+select,
+.route-selector__input {
+  font-size: 15px;
+  padding: 10px 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  background: white;
+  transition: border-color 0.25s ease;
+}
+
+.route-selector__input[type='text']:focus,
+select:focus {
+  border-color: #3a86ff;
+  outline: none;
+  box-shadow: 0 0 6px rgba(58, 134, 255, 0.5);
+}
+
+/* Fieldset и legend */
+fieldset.route-selector__field {
+  border: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+fieldset.route-selector__field legend.route-selector__label {
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* Шкала бюджета */
+.route-selector__budget-wrapper {
+  width: 100%;
+}
+
+.route-selector__budget-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #555;
+  padding: 0 4px;
+  user-select: none;
+}
+
+.route-selector__budget-scale span {
+  flex: 1;
+  text-align: center;
+}
+
+/* Ползунок (range) */
+.route-selector__input[type='range'] {
+  width: 100%;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #d1d1d1;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+/* Ползунок (thumb) для WebKit */
+.route-selector__input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: #3a86ff;
+  border-radius: 50%;
+  cursor: pointer;
+  /* margin-top: -8px;  Центрируем по высоте дорожки */
+  transition: background 0.3s;
+}
+
+.route-selector__input[type='range']::-webkit-slider-thumb:hover {
+  background: #265ecf;
+}
+
+/* Ползунок (thumb) для Firefox */
+.route-selector__input[type='range']::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: #3a86ff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.route-selector__input[type='range']::-moz-range-thumb:hover {
+  background: #265ecf;
+}
+
+/* Текущий выбранный бюджет */
+.route-selector__budget-label {
+  font-size: 15px;
+  color: #333;
+  text-align: center;
+  font-weight: 600;
+  margin-top: -8px;
+  margin-bottom: 0;
+}
+
+/* Кнопка отправки */
+.route-selector__submit {
+  width: 100%;
+  padding: 14px 0;
+  background-color: var(--color-secondary);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.route-selector__submit:hover {
+  background-color: #265ecf;
+  transform: translateY(-2px);
+}
+
+.place-card {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+}
+.place-card__image {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.place-card__info {
+  flex: 1;
+}

@@ -42,9 +42,8 @@ function renderRoute(route, container, index = 0) {
 	const box = document.createElement('div');
 
 	const title = document.createElement('h2');
-	title.textContent = `Маршрут ${index + 1 || 1}: ${route.cityName} — ${
-		route.theme
-	}`;
+	title.textContent = `Маршрут ${index + 1 || 1}: ${route.cityName} — ${route.theme
+		}`;
 	box.appendChild(title);
 
 	route.days.forEach((day, i) => {
@@ -94,24 +93,23 @@ function renderRoute(route, container, index = 0) {
         <body>
           <h2>Маршрут ${index + 1 || 1}: ${route.cityName} — ${route.theme}</h2>
           ${route.days
-						.map(
-							(day, i) => `
+				.map(
+					(day, i) => `
               <h3>День ${i + 1}: ${day.title}</h3>
               <ul>
                 ${day.places
-									.map(
-										(place) => `
-                  <li><strong>${place.time}</strong> — ${
-											place.name
-										} (${getPlaceTypeName(place.type)})<br/>
+							.map(
+								(place) => `
+                  <li><strong>${place.time}</strong> — ${place.name
+									} (${getPlaceTypeName(place.type)})<br/>
                   <small>${place.address}</small></li>
                 `
-									)
-									.join('')}
+							)
+							.join('')}
               </ul>
             `
-						)
-						.join('')}
+				)
+				.join('')}
           <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
           <script>
             window.onload = () => {

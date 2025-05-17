@@ -3,5 +3,4 @@
 @import './top-places.css';
 @import './header.css';
 @import './hero.css';
-/* импортируем другие файлы стилей */
-/* @import './layout.css'; */
+@import './root-selector.css';
