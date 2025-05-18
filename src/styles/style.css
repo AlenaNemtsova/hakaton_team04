@@ -1,0 +1,57 @@
+/* Общие стили сайта */
+
+:root {
+  /* Переменные для цветов */
+  --color-primary: #f9f6f2; /* цвет фона */
+  --color-secondary: #12345c; /* темнл-синий */
+  --color-accent: #e47a1c; /* акценты, логотип */
+  --text-black: #2e2e2e; /* текст основной */
+  --text-grey: #5a5a5a; /* текст серый */
+  --color-buttons-hover: #cc6a17; /* ховер кнопок */
+
+  font-family: 'Montserrat', system-ui, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--color-primary);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+#js-results p {
+  text-align: center;
+}
