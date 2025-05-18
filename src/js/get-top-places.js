@@ -11,7 +11,7 @@ function updateTopPlaces(places) {
     }
 
     //получаем первые 3 топ-места в указанной локации
-    const top3 = places.slice(5, 8);
+    const top3 = places.slice(0, 3);
 
     top3.forEach(place => {
         const name = place.title;
