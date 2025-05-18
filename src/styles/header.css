@@ -69,3 +69,148 @@
   max-width: 250px;
   text-align: right;
 }
+
+.burger-checkbox {
+  position: absolute;
+  visibility: hidden;
+}
+
+.burger {
+  display: none;
+  position: relative;
+  width: 40px;
+  height: 26px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  z-index: 20;
+}
+
+.burger::before,
+.burger::after {
+  content: '';
+  left: 0;
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 10px;
+  background: #000;
+}
+
+.burger::before {
+  top: 0;
+  box-shadow: 0 11px 0 #000;
+  transition: box-shadow 0.3s 0.15s, top 0.3s 0.15s, transform 0.3s;
+}
+
+.burger::after {
+  bottom: 0;
+  transition: bottom 0.3s 0.15s, transform 0.3s;
+}
+
+.burger-checkbox:checked + .burger::before {
+  top: 11px;
+  transform: rotate(45deg);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0);
+  transition: box-shadow 0.15s, top 0.3s, transform 0.3s 0.15s;
+}
+
+.burger-checkbox:checked + .burger::after {
+  bottom: 11px;
+  transform: rotate(-45deg);
+  transition: bottom 0.3s, transform 0.3s 0.15s;
+}
+
+/* зачем? */
+.burger-checkbox:checked ~ .header__menu {
+  transform: translateX(0);
+}
+
+/* Скрываем меню и показываем бургер на маленьких экранах */
+@media (max-width: 1023px) {
+  .header__container {
+    padding-inline: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .header__logo {
+    font-size: 2rem;
+  }
+
+  .header__menu {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 100px 30px;
+    gap: 20px;
+    list-style: none;
+  }
+
+  .header__nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: var(--color-primary);
+    padding: 30px 30px;
+
+    visibility: hidden;
+    opacity: 0;
+    z-index: 11;
+    transform: translateX(100%);
+    will-change: transform, opacity;
+    transition: transform 0.3s ease, visibility 0s linear 0.3s;
+  }
+
+  .header__nav.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0s;
+  }
+
+  .header__menu-item a {
+    font-size: 1.2rem;
+  }
+
+  .burger {
+    display: block;
+  }
+
+  /* Затемнение фона */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+  }
+
+  .burger-checkbox:checked ~ .overlay {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header__nav {
+    position: static;
+    transform: none;
+    padding: 0;
+    background: none;
+  }
+
+  .overlay {
+    display: none;
+  }
+}

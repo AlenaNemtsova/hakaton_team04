@@ -100,7 +100,7 @@
   background-color: white;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .hero__content {
     grid-template-columns: 1fr;
   }
@@ -110,7 +110,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .hero {
     min-height: auto;
     padding-block: 64px;
